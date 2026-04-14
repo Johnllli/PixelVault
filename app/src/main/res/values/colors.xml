@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="primary">#cc97ff</color>
+    <color name="primary_dim">#9c48ea</color>
+    <color name="on_primary">#47007c</color>
+
+    <color name="background">#170529</color>
+    <color name="surface">#170529</color> <color name="on_surface">#f2dfff</color>
+    <color name="on_surface_variant">#baa2cf</color>
+
+    <color name="surface_container">#240e3b</color>
+    <color name="surface_container_high">#2b1344</color>
+    <color name="surface_container_highest">#33184d</color>
+
+    <color name="secondary">#53ddfc</color>
+    <color name="secondary_container">#00687a</color>
+    <color name="on_secondary_container">#ecfaff</color>
+    <color name="tertiary">#ff6f7e</color> <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 </resources>

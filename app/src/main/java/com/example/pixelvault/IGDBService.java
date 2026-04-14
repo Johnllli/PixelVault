@@ -11,8 +11,8 @@ public interface IGDBService {
 
     @POST("games")
     @Headers({
-            "Client-ID: XXX",
-            "Authorization: XXX"
+            "Client-ID: ypbihjn1e1lici4moragoo1src2g15",
+            "Authorization: Bearer lc92laaglds1cm43nnms3xr5e3xbdn"
     })
     Call<List<GameResponse>> getGames(@Body String body);
 }
