@@ -43,7 +43,8 @@ public class HomeFragment extends Fragment {
     private void fetchGames() {
         IGDBService service = RetrofitClient.getIGDBService();
 
-        String query = "fields name, rating, cover.image_id, involved_companies.developer, involved_companies.company.name; " +
+        String query = "fields name, rating, summary, genres.name, cover.image_id, " +
+                "involved_companies.developer, involved_companies.company.name; " +
                 "where first_release_date > 1704067200 & hypes != null; " +
                 "sort hypes desc; " +
                 "limit 50;";

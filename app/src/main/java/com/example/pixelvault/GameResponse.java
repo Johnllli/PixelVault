@@ -1,9 +1,11 @@
 package com.example.pixelvault;
 
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class GameResponse {
+public class GameResponse implements Serializable {
 
     @SerializedName("id")
     private int id;
@@ -20,8 +22,14 @@ public class GameResponse {
     @SerializedName("involved_companies")
     private List<InvolvedCompany> involvedCompanies;
 
+    // Inside GameResponse.java
+    @SerializedName("summary")
+    private String summary;
+
+    public String getSummary() { return summary; }
+
     // 1. Cover must contain image_id
-    public static class Cover {
+    public static class Cover implements Serializable {
         @SerializedName("image_id")
         private String imageId;
 
@@ -29,7 +37,7 @@ public class GameResponse {
     }
 
     // 2. InvolvedCompany must contain the Company object
-    public static class InvolvedCompany {
+    public static class InvolvedCompany implements Serializable {
         @SerializedName("developer")
         private boolean developer;
 
@@ -41,7 +49,7 @@ public class GameResponse {
     }
 
     // 3. Company contains the actual name
-    public static class Company {
+    public static class Company implements Serializable {
         @SerializedName("name")
         private String name;
         public String getName() { return name; }
