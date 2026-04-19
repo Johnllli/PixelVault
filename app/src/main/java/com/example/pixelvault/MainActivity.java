@@ -1,12 +1,11 @@
 package com.example.pixelvault;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-import androidx.annotation.NonNull;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,40 +14,51 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    // If there is a Detail fragment open, close it and go back to the list
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    // If we are already on the Home screen, close the app
+                    setEnabled(false);
+                    getOnBackPressedDispatcher().onBackPressed();
+                }
+            }
+        });
+
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
 
-        // dont change this code its fine just you dont have HomeFragment its in homepage fork
+        // This is the "First Boot" logic. If the app is opening for the first time,
+        // it puts the HomeFragment into the container.
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new HomeFragment())
                     .commit();
         }
 
+        // Listener to swap fragments when you click the Bottom Nav buttons
+        bottomNav.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            int id = item.getItemId();
 
-        bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
-                int id = item.getItemId();
-
-                if (id == R.id.nav_home) {
-                    selectedFragment = new HomeFragment();
-                } else if (id == R.id.nav_search) {
-                    // For now, we point to Home so it doesn't crash
-                    // Replace with 'new SearchFragment()' once you create it
-                    selectedFragment = new HomeFragment();
-                } else if (id == R.id.nav_favorites) {
-                    // Replace with 'new FavoritesFragment()' later
-                    selectedFragment = new HomeFragment();
-                }
-
-                if (selectedFragment != null) {
-                    getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, selectedFragment)
-                            .commit();
-                }
-                return true;
+            if (id == R.id.nav_home) {
+                selectedFragment = new HomeFragment();
+            } else if (id == R.id.nav_search) {
+                selectedFragment = new HomeFragment(); // Placeholder for now
+            } else if (id == R.id.nav_favorites) {
+                selectedFragment = new HomeFragment(); // Placeholder for now
             }
+
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, selectedFragment)
+                        .commit();
+            }
+            return true;
         });
     }
+
+
 }
