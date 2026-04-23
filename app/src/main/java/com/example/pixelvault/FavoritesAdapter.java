@@ -15,6 +15,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder> {
 
@@ -22,11 +23,18 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         void onUnfavorite(FavoriteGame game);
     }
 
-    private List<FavoriteGame> games = new ArrayList<>();
-    private final OnUnfavoriteListener listener;
+    public interface OnGameClickListener {
+        void onGameClick(FavoriteGame game);
+    }
 
-    public FavoritesAdapter(OnUnfavoriteListener listener) {
-        this.listener = listener;
+    private List<FavoriteGame> games = new ArrayList<>();
+    private final OnUnfavoriteListener unfavoriteListener;
+    private final OnGameClickListener clickListener;
+
+    public FavoritesAdapter(OnUnfavoriteListener unfavoriteListener,
+                            OnGameClickListener clickListener) {
+        this.unfavoriteListener = unfavoriteListener;
+        this.clickListener = clickListener;
     }
 
     public void setGames(List<FavoriteGame> games) {
@@ -49,7 +57,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
         holder.tvTitle.setText(game.getName());
         holder.tvGenre.setText(game.getGenre());
-        holder.tvRating.setText(String.format("★ %.1f", game.getRating()));
+        holder.tvRating.setText(String.format(Locale.US, "★ %.1f", game.getRating()));
 
         if (game.getCoverUrl() != null && !game.getCoverUrl().isEmpty()) {
             Glide.with(ctx)
@@ -61,7 +69,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             holder.imgCover.setImageResource(android.R.color.darker_gray);
         }
 
-        holder.btnUnfavorite.setOnClickListener(v -> listener.onUnfavorite(game));
+        holder.btnUnfavorite.setOnClickListener(v -> unfavoriteListener.onUnfavorite(game));
+        holder.itemView.setOnClickListener(v -> clickListener.onGameClick(game));
     }
 
     @Override

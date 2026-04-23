@@ -1,5 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PixelVault</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="placeholder_game_title">Game Title</string>
+    <string name="game_cover_description">Game cover image</string>
+    <string name="favorite_button_description">Add to favorites</string>
+    <string name="detail_limited_developer">See full details on Home page</string>
+    <string name="detail_limited_summary">Full summary available when browsing from the Home page.</string>
 </resources>

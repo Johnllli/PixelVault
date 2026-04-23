@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="220dp"
-    android:layout_margin="12dp"
+    android:layout_margin="8dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
     app:cardBackgroundColor="@color/surface_container">
@@ -12,31 +13,50 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- Cover Image -->
         <ImageView
             android:id="@+id/game_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@color/surface_container_highest" />
+            android:src="@color/surface_container_highest"
+            android:contentDescription="@string/game_cover_description"/>
 
+        <!-- Dark gradient scrim at bottom -->
         <View
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:background="@drawable/hero_scrim"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
+        <!-- Heart button top-right -->
+        <ImageView
+            android:id="@+id/btn_favorite"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="10dp"
+            android:padding="6dp"
+            android:src="@drawable/favorite"
+            android:background="@drawable/glass_circle_bg"
+            android:contentDescription="@string/favorite_button_description"
+            app:tint="@color/on_surface_variant"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Game Title -->
         <TextView
             android:id="@+id/game_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Game Title"
+            android:text="@string/placeholder_game_title"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>

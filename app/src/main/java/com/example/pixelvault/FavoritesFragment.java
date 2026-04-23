@@ -37,7 +37,7 @@ public class FavoritesFragment extends Fragment {
         recyclerView     = view.findViewById(R.id.rv_favorites);
         layoutEmptyState = view.findViewById(R.id.layout_empty_state);
 
-        // "Browse Games" button navigates back to Home tab
+        // Browse button → go back to Home tab
         view.findViewById(R.id.btn_browse).setOnClickListener(v -> {
             if (getActivity() != null) {
                 ((MainActivity) getActivity())
@@ -46,11 +46,10 @@ public class FavoritesFragment extends Fragment {
             }
         });
 
-        adapter = new FavoritesAdapter(this::onUnfavorite);
+        adapter = new FavoritesAdapter(this::onUnfavorite, this::onGameClick);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        // LiveData observer — list updates automatically when DB changes
         AppDatabase.getInstance(requireContext())
                 .favoriteDao()
                 .getAllFavorites()
@@ -72,6 +71,26 @@ public class FavoritesFragment extends Fragment {
                         .favoriteDao()
                         .delete(game)
         );
+    }
+
+    private void onGameClick(FavoriteGame game) {
+        // Pass the FavoriteGame fields as Bundle entries to GameDetailFragment
+        Bundle bundle = new Bundle();
+        bundle.putString("detail_name",     game.getName());
+        bundle.putString("detail_coverUrl", game.getCoverUrl());
+        bundle.putString("detail_genre",    game.getGenre());
+        bundle.putDouble("detail_rating",   game.getRating());
+
+        GameDetailFragment detailFragment = new GameDetailFragment();
+        detailFragment.setArguments(bundle);
+
+        if (getActivity() != null) {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, detailFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     @Override
