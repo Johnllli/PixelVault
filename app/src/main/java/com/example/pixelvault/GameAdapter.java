@@ -53,11 +53,16 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameViewHolder
 
         holder.gameTitle.setText(game.getName());
 
-        Glide.with(ctx)
-                .load(game.getImageUrl())
-                .placeholder(R.color.surface_container_highest)
-                .centerCrop()
-                .into(holder.gameCover);
+        String imageUrl = game.getImageUrl();
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(ctx)
+                    .load(imageUrl)
+                    .placeholder(R.color.surface_container_highest)
+                    .centerCrop()
+                    .into(holder.gameCover);
+        } else {
+            holder.gameCover.setImageResource(R.color.surface_container_highest);
+        }
 
         // Set heart color: pink if favorited, grey if not
         boolean isFavorited = favoritedIds.contains(game.getId());

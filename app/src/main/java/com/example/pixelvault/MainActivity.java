@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
             if (id == R.id.nav_home) {
                 selectedFragment = new HomeFragment();
             } else if (id == R.id.nav_search) {
-                selectedFragment = new HomeFragment(); // placeholder until SearchFragment is built
+                selectedFragment = new SearchFragment(); // ← wired up
             } else if (id == R.id.nav_favorites) {
-                selectedFragment = new FavoritesFragment(); // ← fixed
+                selectedFragment = new FavoritesFragment();
             }
 
             if (selectedFragment != null) {
@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Needed by FavoritesFragment to navigate back to Home tab
     public BottomNavigationView getBottomNav() {
         return bottomNav;
     }

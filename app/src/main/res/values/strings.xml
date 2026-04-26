@@ -6,4 +6,8 @@
     <string name="favorite_button_description">Add to favorites</string>
     <string name="detail_limited_developer">See full details on Home page</string>
     <string name="detail_limited_summary">Full summary available when browsing from the Home page.</string>
+    <string name="search_prompt_title">Find Your Next Game</string>
+    <string name="search_prompt_subtitle">Type a game name and press search.</string>
+    <string name="search_prompt_description">Search icon</string>
+    <string name="search_no_results_title">No games found</string>
 </resources>
